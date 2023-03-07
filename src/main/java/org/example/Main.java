@@ -3,14 +3,14 @@ package org.example;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 
 
 public class Main {
     public static void main(String[] args) {
 
-        System.setProperty("webdriver.chrome.driver", "C:/Users/draco/Desktop/chromedriver");
-        WebDriver driver = new ChromeDriver();
+
+        WebDriver driver = new EdgeDriver();
 
         driver.get("https://www.saucedemo.com");
 
@@ -49,24 +49,13 @@ public class Main {
             e.printStackTrace();
         }
 
-        WebElement cartCountElement = driver.findElement(By.className("cart-count"));
+        WebElement cartCountElement = driver.findElement(By.className("shopping_cart_badge"));
         int cartCount = Integer.parseInt(cartCountElement.getText());
-        if (cartCount == 1) {
+        if (cartCount == 6) {
             System.out.println("Product was added to cart successfully.");
         } else {
             System.out.println("Product was not added to cart.");
         }
-
-//        WebElement shoppingcart = driver.findElement(By.id("shoppingcart"));
-//        WebElement productname = shoppingcart.findElement(By.xpath("//div[contains(@class, 'product-name')]"));
-//
-//        String productNameText = productname.getText();
-//
-//        if(productNameText.equals("Product Name")) {
-//            System.out.println("Product successfully added to the shopping cart.");
-//        } else {
-//            System.out.println("Product not added to the shopping cart.");
-//        }
 
         driver.get("https://www.saucedemo.com/cart.html");
 
@@ -89,7 +78,7 @@ public class Main {
         WebElement finishButton = driver.findElement(By.name("finish"));
         finishButton.click();
 
-        driver.quit();
+//          driver.quit();
     }
 }
 
