@@ -23,7 +23,12 @@ public class Main {
         WebElement loginButton = driver.findElement(By.name("login-button"));
         loginButton.click();
 
-        driver.get("https://www.saucedemo.com/inventory.html");
+        // Validate login
+        if (driver.getCurrentUrl().equals("https://www.saucedemo.com/inventory.html")){
+            System.out.println("Login successful");
+        } else {
+            System.out.printf("Login failed");
+        }
 
         WebElement shoppingcart = driver.findElement(By.id("add-to-cart-sauce-labs-backpack"));
         shoppingcart.click();
@@ -44,20 +49,21 @@ public class Main {
         shoppingcart6.click();
 
         try {
-            Thread.sleep(1500);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        //  Validate product
         WebElement cartCountElement = driver.findElement(By.className("shopping_cart_badge"));
         int cartCount = Integer.parseInt(cartCountElement.getText());
         if (cartCount == 6) {
-            System.out.println("Product was added to cart successfully.");
+            System.out.println("Product was added to cart successfully");
         } else {
-            System.out.println("Product was not added to cart.");
+            System.out.println("Product was not added to cart");
         }
-
-        driver.get("https://www.saucedemo.com/cart.html");
+        WebElement shoppingButton = driver.findElement(By.className("shopping_cart_link"));
+        shoppingButton.click();
 
         WebElement checkoutButton = driver.findElement(By.name("checkout"));
         checkoutButton.click();
@@ -72,8 +78,6 @@ public class Main {
 
         WebElement continueButton = driver.findElement(By.name("continue"));
         continueButton.click();
-
-        driver.get("https://www.saucedemo.com/checkout-step-two.html");
 
         WebElement finishButton = driver.findElement(By.name("finish"));
         finishButton.click();
